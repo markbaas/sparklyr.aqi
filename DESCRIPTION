@@ -1,0 +1,14 @@
+Package: sparklyr.aqi
+Title: Calculate AQI with sparklyr.
+Version: 0.0.0.9000
+Authors@R:
+    person(given = "Mark",
+           family = "Baas",
+           role = c("aut", "cre"),
+           email = "mark.baas@gmail.com")
+Description: Sparklyr extension for calculating AQI and other air indexes for contaminants.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
