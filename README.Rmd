@@ -1,0 +1,67 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# sparklyr.aqi
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of sparklyr.aqi is to calculate air quality indexes world wine.
+
+## Installation
+
+You can install the released version of sparklyr.aqi from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("sparklyr.aqi")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("markbaas/sparklyr.aqi")
+```
+
+## Status
+
+Currently this following indexes are implement
+
+- LKI (Netherlands)
+
+## Example
+
+This is a basic example which calculate the dutch LKI.
+
+```{r example}
+library(dplyr, warn.conflicts = F, quietly = T)
+library(sparklyr)
+library(sparklyr.aqi)
+
+sc <- spark_connect("local[*]")
+
+sparklyr_register_aqi(sc)
+
+data <- data.frame(
+  formula = c("pm25", "pm10", "no2", "o3"),
+  value = c(101, 10, 120, 90)
+)
+
+data %>%
+  copy_to(sc, .) %>%
+  mutate(
+    lki = con2lki(formula, value)
+  )
+```
